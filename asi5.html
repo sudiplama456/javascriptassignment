@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Natural Number Sum Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 12px;
+            margin: 15px;
+            width: 120px;
+            font-size: 16px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #e8f4fc;
+            color: #2c3e50;
+        }
+        .calculation {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            font-family: monospace;
+            text-align: left;
+        }
+        .error {
+            color: #e74c3c;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .example {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff8e1;
+            border-radius: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Natural Number Sum Calculator</h1>
+        
+        <div class="example">
+            <p><strong>Example:</strong> If you enter 5, the program will calculate:</p>
+            <p>1 + 2 + 3 + 4 + 5 = 15</p>
+        </div>
+        
+        <p>Enter a positive integer:</p>
+        <input type="number" id="numberInput" placeholder="Enter number" min="1">
+        <br>
+        <button onclick="calculateSum()">Calculate Sum</button>
+        
+        <div id="error" class="error"></div>
+        <div id="calculation" class="calculation"></div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calculateSum() {
+            // Get input value
+            const input = document.getElementById('numberInput').value;
+            const number = parseInt(input);
+            
+            // Clear previous results
+            document.getElementById('error').textContent = '';
+            document.getElementById('calculation').textContent = '';
+            document.getElementById('result').textContent = '';
+            
+            // Validate input
+            if (isNaN(number) || number < 1 || !Number.isInteger(number)) {
+                document.getElementById('error').textContent = 'Please enter a valid positive integer';
+                return;
+            }
+            
+            let sum = 0;
+            let calculationString = '';
+            
+            // Calculate sum using for loop
+            for (let i = 1; i <= number; i++) {
+                sum += i;
+                
+                // Build calculation string
+                if (i === 1) {
+                    calculationString += i;
+                } else {
+                    calculationString += ' + ' + i;
+                }
+            }
+            
+            // Display calculation process
+            document.getElementById('calculation').textContent = calculationString + ' = ' + sum;
+            
+            // Display final result
+            document.getElementById('result').textContent = 
+                `The sum of natural numbers from 1 to ${number} is: ${sum}`;
+        }
+        
+        // Alternative implementation that shows step-by-step calculation
+        function calculateSumDetailed() {
+            const input = document.getElementById('numberInput').value;
+            const number = parseInt(input);
+            
+            document.getElementById('error').textContent = '';
+            document.getElementById('calculation').textContent = '';
+            document.getElementById('result').textContent = '';
+            
+            if (isNaN(number) || number < 1 || !Number.isInteger(number)) {
+                document.getElementById('error').textContent = 'Please enter a valid positive integer';
+                return;
+            }
+            
+            
+            
+           
+        }
+    </script>
+    
+    
+</body>
+</html>

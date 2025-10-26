@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Tracker - Console</title>
+</head>
+<body>
+    <h2>Movie Rating Tracker</h2>
+    <p>Check the console for output (Press F12)</p>
+    <button onclick="runMovieTracker()">Run Movie Tracker</button>
+
+    <script>
+        function runMovieTracker() {
+            console.log("=== Movie Rating Tracker ===");
+            
+            // Get number of movies
+            const numMovies = parseInt(prompt("How many movies would you like to rate?"));
+            
+            if (isNaN(numMovies) || numMovies <= 0) {
+                console.log("Invalid number of movies entered.");
+                return;
+            }
+            
+            // Array to store movie objects
+            const movies = [];
+            
+            console.log(`\n=== Entering ${numMovies} movies ===`);
+            
+            // Collect movie details
+            for (let i = 0; i < numMovies; i++) {
+                let title, rating;
+                
+                // Get movie title
+                do {
+                    title = prompt(`Enter the title of movie ${i + 1}:`);
+                    if (!title || title.trim() === '') {
+                        alert("Please enter a valid movie title.");
+                    }
+                } while (!title || title.trim() === '');
+                
+                // Get movie rating
+                do {
+                    rating = parseInt(prompt(`Rate "${title}" on a scale of 1 to 5:`));
+                    if (isNaN(rating) || rating < 1 || rating > 5) {
+                        alert("Please enter a valid rating between 1 and 5.");
+                    }
+                } while (isNaN(rating) || rating < 1 || rating > 5);
+                
+                // Create movie object
+                const movie = {
+                    title: title.trim(),
+                    rating: rating
+                };
+                
+                movies.push(movie);
+                console.log(`Added: "${movie.title}" - Rating: ${movie.rating}/5`);
+            }
+            
+            // Sort movies by rating (highest to lowest)
+            movies.sort((a, b) => b.rating - a.rating);
+            
+            // Display results
+            console.log("\n=== Sorted Movie List (Highest to Lowest) ===");
+            movies.forEach((movie, index) => {
+                console.log(`${index + 1}. "${movie.title}" - ${movie.rating}/5`);
+            });
+            
+            // Display highest rated movie
+            const highestRated = movies[0];
+            console.log(`\n=== Highest Rated Movie ===`);
+            console.log(`🏆 "${highestRated.title}" - ${highestRated.rating}/5`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Operations - Console</title>
+</head>
+<body>
+    <h2>Check the console for output (Press F12)</h2>
+    
+    <script>
+        // Create empty array
+        const numbers = [];
+        
+        // Get 5 numbers from user
+        console.log("=== Step 1: Adding Numbers to Array ===");
+        for (let i = 1; i <= 5; i++) {
+            const num = prompt(`Enter Number ${i}:`);
+            numbers.push(Number(num));
+            console.log(`Enter Number ${i}: ${num}`);
+        }
+        
+        // Display original array
+        console.log("\n=== Step 2: Display Array ===");
+        console.log("Numbers:", numbers);
+        
+        // Check if number exists
+        console.log("\n=== Step 3: Search for Number ===");
+        const searchNum = prompt('Enter a Number to Search:');
+        const isFound = numbers.includes(Number(searchNum));
+        
+        if (isFound) {
+            console.log(`Number ${searchNum} is found in the array.`);
+        } else {
+            console.log(`Number ${searchNum} is not found in the array.`);
+        }
+        
+        // Remove last element
+        console.log("\n=== Step 4: Remove Last Element ===");
+        const removed = numbers.pop();
+        console.log("Removed:", removed);
+        console.log("Updated Numbers:", numbers);
+        
+        // Sort array numerically
+        console.log("\n=== Step 5: Sort Array ===");
+        numbers.sort((a, b) => a - b);
+        console.log("Sorted Numbers:", numbers);
+    </script>
+</body>
+</html>

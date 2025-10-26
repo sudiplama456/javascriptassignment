@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triangle Type Classifier</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 500px; 
+            margin: 50px auto; 
+            padding: 20px; 
+            text-align: center;
+        }
+        input { 
+            padding: 8px; 
+            margin: 10px; 
+            width: 80px; 
+            text-align: center;
+        }
+        button { 
+            padding: 10px 20px; 
+            margin: 15px; 
+            cursor: pointer;
+        }
+        .result { 
+            margin: 20px 0; 
+            padding: 15px; 
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .equilateral { background-color: #d4edda; color: #155724; }
+        .isosceles { background-color: #fff3cd; color: #856404; }
+        .scalene { background-color: #f8d7da; color: #721c24; }
+        .invalid { background-color: #f5f5f5; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <h2>Triangle Type Classifier</h2>
+    <p>Enter the lengths of three sides:</p>
+    
+    <input type="number" id="side1" placeholder="Side 1" min="0.1" step="0.1">
+    <input type="number" id="side2" placeholder="Side 2" min="0.1" step="0.1">
+    <input type="number" id="side3" placeholder="Side 3" min="0.1" step="0.1">
+    
+    <br>
+    <button onclick="classifyTriangle()">Classify Triangle</button>
+    
+    <div id="result" class="result"></div>
+
+    <script>
+        function classifyTriangle() {
+            // Get side lengths
+            const a = parseFloat(document.getElementById('side1').value);
+            const b = parseFloat(document.getElementById('side2').value);
+            const c = parseFloat(document.getElementById('side3').value);
+            
+            const resultElement = document.getElementById('result');
+            
+            // Validate inputs
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a <= 0 || b <= 0 || c <= 0) {
+                resultElement.textContent = "Please enter valid positive numbers for all sides";
+                resultElement.className = "result invalid";
+                return;
+            }
+            
+            // Check triangle inequality theorem
+            if (!((a + b > c) && (a + c > b) && (b + c > a))) {
+                resultElement.textContent = "Invalid triangle: sides do not satisfy triangle inequality";
+                resultElement.className = "result invalid";
+                return;
+            }
+            
+            // Classify triangle using logical operators
+            let triangleType;
+            
+            // Check if all sides are equal using && operator
+            if (a === b && b === c && a === c) {
+                triangleType = "Equilateral";
+                resultElement.className = "result equilateral";
+            }
+            // Check if at least two sides are equal using || operator
+            else if (a === b || b === c || a === c) {
+                triangleType = "Isosceles";
+                resultElement.className = "result isosceles";
+            }
+            // If no sides are equal (using ! operator implicitly)
+            else {
+                triangleType = "Scalene";
+                resultElement.className = "result scalene";
+            }
+            
+            resultElement.textContent = `Triangle Type: ${triangleType}`;
+        }
+        
+       
+        
+    </script>
+    
+    
+</body>
+</html>

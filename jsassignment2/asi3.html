@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Even Numbers - Console</title>
+</head>
+<body>
+    <h2>Check the console for output (Press F12)</h2>
+    <button onclick="runProgram()">Run Program</button>
+
+    <script>
+        function runProgram() {
+            // Create empty array to store numbers
+            const numbers = [];
+            
+            console.log("=== Number Entry ===");
+            
+            // Use while loop to get numbers until user enters 'done'
+            let userInput;
+            
+            do {
+                userInput = prompt('Enter a number (or "done" to finish):');
+                
+                // Check if user wants to finish
+                if (userInput.toLowerCase() === 'done') {
+                    break;
+                }
+                
+                // Convert to number and add to array if valid
+                const number = Number(userInput);
+                if (!isNaN(number)) {
+                    numbers.push(number);
+                    console.log(`Entered: ${number}`);
+                } else {
+                    alert('Please enter a valid number or "done" to finish.');
+                }
+                
+            } while (true);
+            
+            console.log("\n=== All Entered Numbers ===");
+            console.log("Numbers:", numbers);
+            
+            console.log("\n=== Even Numbers ===");
+            // Extract even numbers using for...of loop
+            const evenNumbers = [];
+            
+            for (const number of numbers) {
+                if (number % 2 === 0) {
+                    evenNumbers.push(number);
+                    console.log(`Even: ${number}`);
+                }
+            }
+            
+            // Display results
+            if (evenNumbers.length === 0) {
+                console.log("Even Numbers: None");
+            } else {
+                console.log("Even Numbers:", evenNumbers.join(', '));
+            }
+            
+            console.log("\n=== Program Complete ===");
+            console.log(`Total numbers: ${numbers.length}`);
+            console.log(`Even numbers: ${evenNumbers.length}`);
+        }
+    </script>
+</body>
+</html>

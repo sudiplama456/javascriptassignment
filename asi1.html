@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Temp Converter</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin: 50px; }
+        input { padding: 8px; margin: 10px; }
+        div { margin: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Temperature Converter</h2>
+    <p>Enter Celsius:</p>
+    <input type="number" id="celsius" placeholder="Celsius">
+    
+    <div>Fahrenheit: <span id="fahrenheit">--</span> °F</div>
+    <div>Kelvin: <span id="kelvin">--</span> K</div>
+
+    <script>
+        document.getElementById('celsius').oninput = function() {
+            const c = parseFloat(this.value);
+            if (!isNaN(c)) {
+                document.getElementById('fahrenheit').textContent = (c * 9/5 + 32).toFixed(2);
+                document.getElementById('kelvin').textContent = (c + 273.15).toFixed(2);
+            } else {
+                document.getElementById('fahrenheit').textContent = '--';
+                document.getElementById('kelvin').textContent = '--';
+            }
+        };
+    </script>
+</body>
+</html>

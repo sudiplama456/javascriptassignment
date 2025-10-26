@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 15px;
+            width: 100px;
+            font-size: 16px;
+            text-align: center;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .grade-0 { background-color: #ffebee; color: #c62828; }
+        .grade-1 { background-color: #fff3e0; color: #ef6c00; }
+        .grade-2 { background-color: #fff8e1; color: #f9a825; }
+        .grade-3 { background-color: #f3e5f5; color: #7b1fa2; }
+        .grade-4 { background-color: #e8f5e8; color: #2e7d32; }
+        .grade-5 { background-color: #e3f2fd; color: #1565c0; }
+        .invalid { background-color: #f5f5f5; color: #757575; }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Grade Calculator</h2>
+    <p>Enter your score (0-100):</p>
+    
+    <input type="number" id="score" placeholder="Score" min="0" max="100">
+    <br>
+    <button onclick="calculateGrade()">Calculate Grade</button>
+    
+    <div id="result" class="result"></div>
+
+    <table>
+        <tr>
+            <th>Score Range</th>
+            <th>Grade</th>
+        </tr>
+        <tr>
+            <td>0 - 39</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>40 - 51</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>52 - 63</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>64 - 75</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>76 - 87</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>88 - 100</td>
+            <td>5</td>
+        </tr>
+    </table>
+
+    <script>
+        function calculateGrade() {
+            const score = parseInt(document.getElementById('score').value);
+            const resultElement = document.getElementById('result');
+            
+            // Validate input
+            if (isNaN(score) || score < 0 || score > 100) {
+                resultElement.textContent = "Please enter a valid score between 0 and 100";
+                resultElement.className = "result invalid";
+                return;
+            }
+            
+            let grade;
+            
+            // Determine grade using logical conditions
+            if (score >= 0 && score <= 39) {
+                grade = 0;
+            } else if (score >= 40 && score <= 51) {
+                grade = 1;
+            } else if (score >= 52 && score <= 63) {
+                grade = 2;
+            } else if (score >= 64 && score <= 75) {
+                grade = 3;
+            } else if (score >= 76 && score <= 87) {
+                grade = 4;
+            } else if (score >= 88 && score <= 100) {
+                grade = 5;
+            }
+            
+            // Display result with appropriate styling
+            resultElement.textContent = `Score: ${score} | Grade: ${grade}`;
+            resultElement.className = `result grade-${grade}`;
+        }
+        
+       
+        
+    </script>
+    
+    
+</body>
+</html>

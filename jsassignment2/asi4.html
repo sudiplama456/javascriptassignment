@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sort Array Function</title>
+</head>
+<body>
+    <script>
+        // Function definition
+        function sortArray(numbers) {
+            return [...numbers].sort((a, b) => a - b);
+        }
+
+        // Test the function
+        const testArray = [5, 2, 8, 1, 9, 3];
+        const sortedArray = sortArray(testArray);
+        
+        console.log("Original array:", testArray);
+        console.log("Sorted array:", sortedArray);
+    </script>
+</body>
+</html>

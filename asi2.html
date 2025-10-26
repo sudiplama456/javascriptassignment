@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distance Calculator</title>
+    <style>
+        body { font-family: Arial; max-width: 500px; margin: 50px auto; padding: 20px; }
+        input { padding: 8px; margin: 5px; width: 80px; }
+        button { padding: 10px 20px; margin: 10px; }
+        p { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h2>Distance Calculator</h2>
+    
+    <p>Enter coordinates for Point 1:</p>
+    <input type="number" id="x1" placeholder="x1">
+    <input type="number" id="y1" placeholder="y1">
+    
+    <p>Enter coordinates for Point 2:</p>
+    <input type="number" id="x2" placeholder="x2">
+    <input type="number" id="y2" placeholder="y2">
+    
+    <br>
+    <button onclick="calculateDistance()">Calculate Distance</button>
+    
+    <p id="result"></p>
+    <p id="formula"></p>
+
+    <script>
+        function calculateDistance() {
+            // Get input values
+            const x1 = parseFloat(document.getElementById('x1').value);
+            const y1 = parseFloat(document.getElementById('y1').value);
+            const x2 = parseFloat(document.getElementById('x2').value);
+            const y2 = parseFloat(document.getElementById('y2').value);
+            
+            // Validate inputs
+            if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
+                document.getElementById('result').textContent = "Please enter valid numbers for all coordinates";
+                return;
+            }
+            
+            // Calculate distance using Euclidean formula
+            const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+            
+            // Display result
+            document.getElementById('result').textContent = 
+                `Distance between (${x1}, ${y1}) and (${x2}, ${y2}) is: ${distance.toFixed(2)}`;
+            
+            // Show the formula used
+            document.getElementById('formula').textContent = 
+                `Formula: √((${x2} - ${x1})² + (${y2} - ${y1})²) = ${distance.toFixed(2)}`;
+        }
+        
+        
+    </script>
+    
+    <button onclick="calculateWithSplit()">Or enter all coordinates at once</button>
+</body>
+</html>

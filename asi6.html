@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .table-container {
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            min-width: 50px;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e8f4fc;
+        }
+        .error {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .instructions {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Multiplication Table Generator</h1>
+        
+        <div class="instructions">
+            <p>This program will generate a multiplication table for any positive integer you enter.</p>
+            <p>For example, if you enter 5, it will create a 5x5 table showing products from 1×1 to 5×5.</p>
+        </div>
+        
+        <div class="input-section">
+            <button onclick="generateTable()">Generate Multiplication Table</button>
+        </div>
+        
+        <div id="error" class="error"></div>
+        
+        <div id="table-container" class="table-container">
+            <!-- The multiplication table will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        function generateTable() {
+            // Prompt user for input
+            const userInput = prompt("Enter a positive integer:");
+            
+            // Clear previous error and table
+            document.getElementById('error').textContent = '';
+            document.getElementById('table-container').innerHTML = '';
+            
+            // Convert input to number
+            const number = parseInt(userInput);
+            
+            // Validate input
+            if (isNaN(number) || number < 1 || !Number.isInteger(number)) {
+                document.getElementById('error').textContent = 'Please enter a valid positive integer.';
+                return;
+            }
+            
+            // Create table element
+            const table = document.createElement('table');
+            
+            // Create header row
+            const headerRow = document.createElement('tr');
+            
+            // Add empty cell for top-left corner
+            const emptyHeader = document.createElement('th');
+            emptyHeader.textContent = '×';
+            headerRow.appendChild(emptyHeader);
+            
+            // Add column headers
+            for (let i = 1; i <= number; i++) {
+                const th = document.createElement('th');
+                th.textContent = i;
+                headerRow.appendChild(th);
+            }
+            
+            table.appendChild(headerRow);
+            
+            // Generate table using nested for loops
+            for (let i = 1; i <= number; i++) {
+                const row = document.createElement('tr');
+                
+                // Add row header
+                const rowHeader = document.createElement('th');
+                rowHeader.textContent = i;
+                row.appendChild(rowHeader);
+                
+                // Fill row with products
+                for (let j = 1; j <= number; j++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = i * j;
+                    row.appendChild(cell);
+                }
+                
+                table.appendChild(row);
+            }
+            
+            // Add table to the document
+            document.getElementById('table-container').appendChild(table);
+        }
+        
+        // Alternative implementation with more formatting
+        function generateStyledTable() {
+            const userInput = prompt("Enter a positive integer:");
+            
+            document.getElementById('error').textContent = '';
+            document.getElementById('table-container').innerHTML = '';
+            
+            const number = parseInt(userInput);
+            
+            if (isNaN(number) || number < 1 || !Number.isInteger(number)) {
+                document.getElementById('error').textContent = 'Please enter a valid positive integer.';
+                return;
+            }
+            
+            // Create a more styled table
+            const table = document.createElement('table');
+            
+            // Create and append header row
+            const headerRow = document.createElement('tr');
+            const emptyHeader = document.createElement('th');
+            emptyHeader.textContent = '×';
+            headerRow.appendChild(emptyHeader);
+            
+            for (let i = 1; i <= number; i++) {
+                const th = document.createElement('th');
+                th.textContent = i;
+                th.style.backgroundColor = '#2c3e50';
+                headerRow.appendChild(th);
+            }
+            
+            table.appendChild(headerRow);
+            
+            // Generate table body with nested loops
+            for (let i = 1; i <= number; i++) {
+                const row = document.createElement('tr');
+                
+                // Row header
+                const rowHeader = document.createElement('th');
+                rowHeader.textContent = i;
+                rowHeader.style.backgroundColor = '#2c3e50';
+                rowHeader.style.color = 'white';
+                row.appendChild(rowHeader);
+                
+                // Table cells with products
+                for (let j = 1; j <= number; j++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = i * j;
+                    
+                    // Add alternating background colors for better readability
+                    if (i === j) {
+                        cell.style.backgroundColor = '#e8f4fc';
+                    }
+                    
+                    row.appendChild(cell);
+                }
+                
+                table.appendChild(row);
+            }
+            
+            document.getElementById('table-container').appendChild(table);
+        }
+    </script>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="generateStyledTable()">Generate Styled Table</button>
+    </div>
+</body>
+</html>
